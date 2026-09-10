@@ -17,6 +17,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import {
   IconChartBar,
+  IconBrandDiscord,
   IconChevronDown,
   IconHome,
   IconInbox,
@@ -37,6 +38,7 @@ const links = [
   { href: '/jira', label: 'Jira', icon: IconStack2, count: 4 },
   { href: '/salesforce', label: 'Salesforce', icon: IconTicket, count: 5 },
   { href: '/emails', label: 'E-mails', icon: IconMail, count: 3 },
+  { href: '/discord', label: 'Discord', icon: IconBrandDiscord, count: 3 },
   { href: '/metrics', label: 'Métricas', icon: IconChartBar },
   { href: '/settings', label: 'Configurações', icon: IconSettings },
 ];

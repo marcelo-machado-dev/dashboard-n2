@@ -23,6 +23,10 @@ it('renders the primary navigation around page content', () => {
     'data-active',
     'true',
   );
+  expect(screen.getByRole('link', { name: /discord/i })).toHaveAttribute(
+    'href',
+    '/discord',
+  );
   expect(
     screen.getByRole('link', { name: /minha fila/i }).querySelector(
       '[data-sidebar-icon]',

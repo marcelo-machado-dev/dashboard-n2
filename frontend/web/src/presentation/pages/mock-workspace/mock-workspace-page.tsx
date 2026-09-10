@@ -26,7 +26,7 @@ import {
 } from '@tabler/icons-react';
 import { useMemo, useState } from 'react';
 
-type Variant = 'jira' | 'salesforce' | 'emails' | 'metrics' | 'settings';
+type Variant = 'jira' | 'salesforce' | 'emails' | 'discord' | 'metrics' | 'settings';
 
 type RecordItem = {
   id: string;
@@ -55,12 +55,18 @@ const records: Record<Exclude<Variant, 'metrics' | 'settings'>, RecordItem[]> = 
     { id: 'EM-2181', title: 'Acesso ao relatório de uso', secondary: 'joao@betatech.com • 1 mensagem', status: 'Não lido', statusColor: 'blue', priority: 'Média', priorityColor: 'gray', age: 'há 1h' },
     { id: 'EM-2172', title: 'Confirmação da janela de manutenção', secondary: 'ops@nexuslabs.io • 6 mensagens', status: 'Aguardando', statusColor: 'yellow', priority: 'Baixa', priorityColor: 'gray', age: 'ontem' },
   ],
+  discord: [
+    { id: 'DIS-1182', title: 'Como faço para resetar minha senha?', secondary: '#suporte • @lucas.m • há 12 min', status: 'Sem resposta', statusColor: 'red', priority: 'Urgente', priorityColor: 'red', age: 'há 12 min' },
+    { id: 'DIS-1176', title: 'O webhook está retornando erro 401', secondary: '#integracoes • @carol_dev • há 38 min', status: 'Sem resposta', statusColor: 'orange', priority: 'Alta', priorityColor: 'orange', age: 'há 38 min' },
+    { id: 'DIS-1169', title: 'Podem compartilhar o horário da manutenção?', secondary: '#avisos • @andre.s • ontem', status: 'Sem resposta', statusColor: 'yellow', priority: 'Média', priorityColor: 'gray', age: 'ontem' },
+  ],
 };
 
 const pageCopy: Record<Exclude<Variant, 'metrics' | 'settings'>, { title: string; description: string; placeholder: string }> = {
   jira: { title: 'Jira', description: 'Solicitações e histórias que precisam da sua atenção.', placeholder: 'Buscar no Jira' },
   salesforce: { title: 'Salesforce', description: 'Casos de clientes acompanhados pela sua equipe.', placeholder: 'Buscar no Salesforce' },
   emails: { title: 'E-mails', description: 'Conversas recentes que aguardam uma resposta.', placeholder: 'Buscar nos e-mails' },
+  discord: { title: 'Discord', description: 'Mensagens lidas que ainda precisam de uma resposta.', placeholder: 'Buscar nas mensagens do Discord' },
 };
 
 export function MockWorkspacePage({ variant }: { variant: Variant }) {
@@ -73,9 +79,10 @@ export function MockWorkspacePage({ variant }: { variant: Variant }) {
 function IntegrationWorkspace({ variant }: { variant: Exclude<Variant, 'metrics' | 'settings'> }) {
   const copy = pageCopy[variant];
   const [query, setQuery] = useState('');
+  const [resolvedIds, setResolvedIds] = useState<string[]>([]);
   const filtered = useMemo(
-    () => records[variant].filter((item) => `${item.id} ${item.title} ${item.secondary}`.toLowerCase().includes(query.toLowerCase())),
-    [query, variant],
+    () => records[variant].filter((item) => !resolvedIds.includes(item.id)).filter((item) => `${item.id} ${item.title} ${item.secondary}`.toLowerCase().includes(query.toLowerCase())),
+    [query, resolvedIds, variant],
   );
 
   return (
@@ -90,12 +97,12 @@ function IntegrationWorkspace({ variant }: { variant: Exclude<Variant, 'metrics'
         <SummaryCard label="Atualizados hoje" value="8" color="green" />
       </SimpleGrid>
       <Paper withBorder radius="md" p="lg">
-        <Group justify="space-between" mb="md"><Text fw={700}>Itens recentes</Text><Text size="sm" c="dimmed">{filtered.length} resultados</Text></Group>
+        <Group justify="space-between" mb="md"><Text fw={700}>{variant === 'discord' ? 'Mensagens sem resposta' : 'Itens recentes'}</Text><Text size="sm" c="dimmed">{filtered.length} resultados</Text></Group>
         <Group mb="lg" align="flex-end">
           <TextInput flex={1} leftSection={<IconSearch size={16} />} placeholder={copy.placeholder} value={query} onChange={(event) => setQuery(event.currentTarget.value)} />
           <Select w={170} leftSection={<IconAdjustments size={16} />} data={['Todos', 'Urgente', 'Alta', 'Aguardando']} defaultValue="Todos" />
         </Group>
-        <Table.ScrollContainer minWidth={720}><Table verticalSpacing="md" highlightOnHover><Table.Thead><Table.Tr><Table.Th>ID</Table.Th><Table.Th>Item</Table.Th><Table.Th>Status</Table.Th><Table.Th>Prioridade</Table.Th><Table.Th>Atualização</Table.Th><Table.Th /></Table.Tr></Table.Thead><Table.Tbody>{filtered.map((item) => <Table.Tr key={item.id}><Table.Td><Text size="sm" fw={700}>{item.id}</Text></Table.Td><Table.Td><Text fw={600}>{item.title}</Text><Text size="xs" c="dimmed">{item.secondary}</Text></Table.Td><Table.Td><Badge color={item.statusColor} variant="light">{item.status}</Badge></Table.Td><Table.Td><Badge color={item.priorityColor} variant="light">{item.priority}</Badge></Table.Td><Table.Td><Text size="sm" c="dimmed">{item.age}</Text></Table.Td><Table.Td><Button size="compact-sm" variant="subtle" rightSection={<IconExternalLink size={14} />}>Abrir</Button></Table.Td></Table.Tr>)}</Table.Tbody></Table></Table.ScrollContainer>
+        <Table.ScrollContainer minWidth={720}><Table verticalSpacing="md" highlightOnHover><Table.Thead><Table.Tr><Table.Th>ID</Table.Th><Table.Th>{variant === 'discord' ? 'Mensagem' : 'Item'}</Table.Th><Table.Th>Status</Table.Th><Table.Th>Prioridade</Table.Th><Table.Th>Atualização</Table.Th><Table.Th /></Table.Tr></Table.Thead><Table.Tbody>{filtered.map((item) => <Table.Tr key={item.id}><Table.Td><Text size="sm" fw={700}>{item.id}</Text></Table.Td><Table.Td><Text fw={600}>{item.title}</Text><Text size="xs" c="dimmed">{item.secondary}</Text></Table.Td><Table.Td><Badge color={item.statusColor} variant="light">{item.status}</Badge></Table.Td><Table.Td><Badge color={item.priorityColor} variant="light">{item.priority}</Badge></Table.Td><Table.Td><Text size="sm" c="dimmed">{item.age}</Text></Table.Td><Table.Td><Group gap="xs" wrap="nowrap"><Button size="compact-sm" variant="subtle" rightSection={<IconExternalLink size={14} />}>{variant === 'discord' ? 'Responder' : 'Abrir'}</Button>{variant === 'discord' && <Button size="compact-sm" variant="light" color="green" onClick={() => setResolvedIds((ids) => [...ids, item.id])}>Resolver</Button>}</Group></Table.Td></Table.Tr>)}</Table.Tbody></Table></Table.ScrollContainer>
         {filtered.length === 0 && <Text ta="center" c="dimmed" py="xl">Nenhum item encontrado.</Text>}
       </Paper>
     </Stack>

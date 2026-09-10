@@ -17,6 +17,18 @@ describe('MockWorkspacePage', () => {
     expect(screen.getByPlaceholderText('Buscar no Jira')).toBeInTheDocument();
   });
 
+  it('renders Discord messages that still need a response', () => {
+    render(
+      <MantineProvider>
+        <MockWorkspacePage variant="discord" />
+      </MantineProvider>,
+    );
+
+    expect(screen.getByRole('heading', { name: 'Discord' })).toBeInTheDocument();
+    expect(screen.getByText('Como faço para resetar minha senha?')).toBeInTheDocument();
+    expect(screen.getByText('Mensagens sem resposta')).toBeInTheDocument();
+  });
+
   it('renders metrics and settings mock workspaces', () => {
     const { rerender } = render(
       <MantineProvider>
