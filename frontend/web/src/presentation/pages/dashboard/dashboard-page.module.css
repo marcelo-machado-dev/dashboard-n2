@@ -1,0 +1,53 @@
+.queuePanel {
+  grid-column: span 2;
+}
+
+.itemButton {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+  border: 1px solid var(--mantine-color-gray-2);
+  background: var(--mantine-color-white);
+  border-radius: var(--mantine-radius-md);
+  padding: 0.9rem;
+  cursor: pointer;
+  transition:
+    border-color 120ms ease,
+    transform 120ms ease;
+}
+
+.itemButton:hover {
+  border-color: var(--mantine-color-brand-4);
+  transform: translateY(-1px);
+}
+
+.itemButton:focus-visible {
+  outline: 2px solid var(--mantine-color-brand-5);
+  outline-offset: 2px;
+}
+
+.itemMeta {
+  min-width: 0;
+}
+
+.itemActions {
+  flex-shrink: 0;
+}
+
+@media (max-width: 62em) {
+  .queuePanel {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 36em) {
+  .itemButton {
+    flex-direction: column;
+  }
+
+  .itemActions {
+    align-items: flex-start;
+  }
+}
