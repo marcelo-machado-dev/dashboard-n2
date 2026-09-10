@@ -102,7 +102,7 @@ export function ApplicationShell({
         </Group>
       </AppShell.Header>
 
-      <AppShell.Navbar p="md" className={classes.navbar}>
+      <AppShell.Navbar p="md" className={classes.navbar} data-theme="dark">
         <AppShell.Section grow component={ScrollArea}>
           <Text className={classes.sectionLabel}>ESPAÇO DE TRABALHO</Text>
           <Stack gap={5} mt="sm">
@@ -148,7 +148,7 @@ export function ApplicationShell({
               <Text size="xs" fw={700}>
                 Ambiente de demonstração
               </Text>
-              <Text size="xs" c="dimmed">
+              <Text size="xs" className={classes.environmentMeta}>
                 Dados locais mockados
               </Text>
             </div>

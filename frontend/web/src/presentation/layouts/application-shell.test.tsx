@@ -18,6 +18,7 @@ it('renders the primary navigation around page content', () => {
   );
 
   expect(screen.getByRole('navigation')).toBeInTheDocument();
+  expect(screen.getByRole('navigation')).toHaveAttribute('data-theme', 'dark');
   expect(screen.getByRole('link', { name: /início/i })).toHaveAttribute(
     'href',
     '/',

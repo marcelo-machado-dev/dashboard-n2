@@ -5,8 +5,40 @@
 }
 
 .navbar {
-  background: var(--mantine-color-white);
-  border-color: var(--mantine-color-gray-2);
+  --sidebar-bg: #111b31;
+  --sidebar-surface: #1a2946;
+  --sidebar-text: #edf3ff;
+  --sidebar-muted: #9eafd0;
+  background: var(--sidebar-bg);
+  border-color: #253655;
+  color: var(--sidebar-text);
+}
+
+.navbar :global(.mantine-ScrollArea-viewport) {
+  scrollbar-color: #34496f transparent;
+}
+
+.navbar :global(.mantine-NavLink-root) {
+  color: var(--sidebar-muted);
+}
+
+.navbar :global(.mantine-NavLink-root:hover) {
+  background: rgba(123, 157, 224, 0.12);
+  color: var(--sidebar-text);
+}
+
+.navbar :global(.mantine-NavLink-root[data-active]) {
+  background: var(--sidebar-surface);
+  color: #ffffff;
+  box-shadow: inset 3px 0 0 var(--mantine-color-brand-5);
+}
+
+.navbar :global(.mantine-NavLink-label) {
+  font-weight: 650;
+}
+
+.navbar :global(.mantine-NavLink-section) {
+  color: inherit;
 }
 
 .brandMark {
@@ -43,7 +75,7 @@
 
 .sectionLabel {
   padding-inline: 10px;
-  color: var(--mantine-color-gray-5);
+  color: #7185aa;
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -57,9 +89,17 @@
 .environmentCard {
   margin-top: var(--mantine-spacing-md);
   padding: 12px;
-  border: 1px solid var(--mantine-color-gray-2);
+  border: 1px solid #2b4064;
   border-radius: var(--mantine-radius-md);
-  background: var(--mantine-color-gray-0);
+  background: rgba(26, 41, 70, 0.72);
+}
+
+.environmentCard :global(.mantine-Text-root) {
+  color: var(--sidebar-text);
+}
+
+.environmentMeta {
+  color: var(--sidebar-muted) !important;
 }
 
 .environmentDot {
