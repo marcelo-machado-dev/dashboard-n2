@@ -1,0 +1,79 @@
+.header {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: var(--mantine-color-gray-2);
+  backdrop-filter: blur(12px);
+}
+
+.navbar {
+  background: var(--mantine-color-white);
+  border-color: var(--mantine-color-gray-2);
+}
+
+.brandMark {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  color: white;
+  background: linear-gradient(
+    145deg,
+    var(--mantine-color-brand-5),
+    var(--mantine-color-brand-8)
+  );
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  box-shadow: 0 7px 16px rgba(49, 84, 197, 0.22);
+}
+
+.brandName {
+  color: var(--mantine-color-gray-9);
+  letter-spacing: -0.025em;
+}
+
+.profileButton {
+  padding: 5px 8px;
+  border-radius: var(--mantine-radius-md);
+}
+
+.profileButton:hover {
+  background: var(--mantine-color-gray-0);
+}
+
+.sectionLabel {
+  padding-inline: 10px;
+  color: var(--mantine-color-gray-5);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.navLink {
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.environmentCard {
+  margin-top: var(--mantine-spacing-md);
+  padding: 12px;
+  border: 1px solid var(--mantine-color-gray-2);
+  border-radius: var(--mantine-radius-md);
+  background: var(--mantine-color-gray-0);
+}
+
+.environmentDot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--mantine-color-green-6);
+  box-shadow: 0 0 0 4px var(--mantine-color-green-1);
+}
+
+@media (max-width: 48em) {
+  .brandName,
+  .profileCopy {
+    display: none;
+  }
+}
