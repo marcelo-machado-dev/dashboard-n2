@@ -19,6 +19,15 @@ it('renders the primary navigation around page content', () => {
 
   expect(screen.getByRole('navigation')).toBeInTheDocument();
   expect(screen.getByRole('navigation')).toHaveAttribute('data-theme', 'dark');
+  expect(screen.getByRole('link', { name: /minha fila/i })).toHaveAttribute(
+    'data-active',
+    'true',
+  );
+  expect(
+    screen.getByRole('link', { name: /minha fila/i }).querySelector(
+      '[data-sidebar-icon]',
+    ),
+  ).toHaveAttribute('data-tone', 'light');
   expect(screen.getByRole('link', { name: /início/i })).toHaveAttribute(
     'href',
     '/',

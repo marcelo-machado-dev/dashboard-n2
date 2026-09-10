@@ -117,6 +117,8 @@ export function ApplicationShell({
                     variant="transparent"
                     color={pathname === href ? 'brand' : 'gray'}
                     size={28}
+                    data-sidebar-icon
+                    data-tone={pathname === href ? 'light' : 'muted'}
                   >
                     <Icon size={19} stroke={1.8} />
                   </ThemeIcon>

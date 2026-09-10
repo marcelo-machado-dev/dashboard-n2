@@ -41,6 +41,14 @@
   color: inherit;
 }
 
+.navbar :global([data-sidebar-icon]) {
+  color: var(--sidebar-muted) !important;
+}
+
+.navbar :global(.mantine-NavLink-root[data-active]) :global([data-sidebar-icon]) {
+  color: #ffffff !important;
+}
+
 .brandMark {
   width: 36px;
   height: 36px;
