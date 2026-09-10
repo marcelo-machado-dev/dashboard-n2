@@ -33,5 +33,5 @@ export function QueuePage({ repository }: { repository: WorkItemRepository }) {
     );
   }
 
-  return <WorkQueue items={items} />;
+  return <WorkQueue items={items} onRefresh={retry} />;
 }

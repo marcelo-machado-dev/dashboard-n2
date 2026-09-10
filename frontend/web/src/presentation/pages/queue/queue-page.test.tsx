@@ -48,6 +48,24 @@ it('shows an empty state when no item matches', async () => {
   expect(screen.getByText('Nenhum item encontrado')).toBeInTheDocument();
 });
 
+it('reloads the queue when synchronizing', async () => {
+  const initialItem = { ...createMockWorkItems()[0], title: 'Caso inicial' };
+  const updatedItem = { ...initialItem, title: 'Caso atualizado' };
+  const findAll = vi
+    .fn()
+    .mockResolvedValueOnce([initialItem])
+    .mockResolvedValueOnce([updatedItem]);
+
+  renderPage({ findAll });
+
+  expect(await screen.findByText('Caso inicial')).toBeInTheDocument();
+
+  fireEvent.click(screen.getByRole('button', { name: /sincronizar/i }));
+
+  expect(await screen.findByText('Caso atualizado')).toBeInTheDocument();
+  expect(findAll).toHaveBeenCalledTimes(2);
+});
+
 it('shows an error and retries loading', async () => {
   const findAll = vi
     .fn()

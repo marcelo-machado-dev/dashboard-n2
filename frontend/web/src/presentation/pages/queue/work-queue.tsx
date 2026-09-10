@@ -13,7 +13,6 @@ import {
   Title,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { notifications } from '@mantine/notifications';
 import { IconFilterOff, IconRefresh, IconSearch } from '@tabler/icons-react';
 import { useMemo, useState } from 'react';
 
@@ -62,7 +61,13 @@ const sortOptions = [
   { value: 'updated', label: 'Última atualização' },
 ];
 
-export function WorkQueue({ items }: { items: WorkItem[] }) {
+export function WorkQueue({
+  items,
+  onRefresh,
+}: {
+  items: WorkItem[];
+  onRefresh: () => Promise<void>;
+}) {
   const [query, setQuery] = useState<WorkQueueQuery>(defaultWorkQueueQuery);
   const [selected, setSelected] = useState<WorkItem>();
   const [opened, { open, close }] = useDisclosure(false);
@@ -99,13 +104,7 @@ export function WorkQueue({ items }: { items: WorkItem[] }) {
         <Button
           leftSection={<IconRefresh size={16} />}
           variant="light"
-          onClick={() =>
-            notifications.show({
-              title: 'Fila atualizada',
-              message: 'Os dados mockados foram recarregados para demonstração.',
-              color: 'green',
-            })
-          }
+          onClick={() => void onRefresh()}
         >
           Sincronizar
         </Button>
