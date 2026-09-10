@@ -1,0 +1,28 @@
+services:
+  frontend:
+    build:
+      context: ./frontend/web
+      target: development
+    environment:
+      NEXT_PUBLIC_APP_NAME: ${NEXT_PUBLIC_APP_NAME:-Central N2}
+      WATCHPACK_POLLING: "true"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/web:/app
+      - frontend_node_modules:/app/node_modules
+      - frontend_next:/app/.next
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget --no-verbose --tries=1 --spider http://127.0.0.1:3000/ || exit 1",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
+
+volumes:
+  frontend_node_modules:
+  frontend_next:
