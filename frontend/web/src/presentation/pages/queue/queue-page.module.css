@@ -1,0 +1,30 @@
+.filters {
+  display: grid;
+  grid-template-columns: minmax(16rem, 2fr) repeat(4, minmax(9rem, 1fr));
+  gap: 0.75rem;
+}
+
+.tablePanel {
+  overflow: hidden;
+}
+
+.row {
+  cursor: pointer;
+}
+
+.row:focus-visible {
+  outline: 2px solid var(--mantine-color-brand-5);
+  outline-offset: -2px;
+}
+
+@media (max-width: 75em) {
+  .filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 48em) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+}
