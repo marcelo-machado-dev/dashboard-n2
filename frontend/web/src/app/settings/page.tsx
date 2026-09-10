@@ -1,10 +1,7 @@
-import { FutureSectionPage } from '@/presentation/pages/future-section/future-section-page';
+import { MockWorkspacePage } from '@/presentation/pages/mock-workspace/mock-workspace-page';
 
 export default function SettingsRoute() {
   return (
-    <FutureSectionPage
-      title="Configurações"
-      description="Preferências pessoais e configurações de integração serão disponibilizadas futuramente."
-    />
+    <MockWorkspacePage variant="settings" />
   );
 }

@@ -1,10 +1,7 @@
-import { FutureSectionPage } from '@/presentation/pages/future-section/future-section-page';
+import { MockWorkspacePage } from '@/presentation/pages/mock-workspace/mock-workspace-page';
 
 export default function EmailsRoute() {
   return (
-    <FutureSectionPage
-      title="E-mails"
-      description="A visão dedicada de mensagens e conversas pendentes está planejada."
-    />
+    <MockWorkspacePage variant="emails" />
   );
 }

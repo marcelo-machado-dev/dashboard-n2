@@ -1,10 +1,7 @@
-import { FutureSectionPage } from '@/presentation/pages/future-section/future-section-page';
+import { MockWorkspacePage } from '@/presentation/pages/mock-workspace/mock-workspace-page';
 
 export default function SalesforceRoute() {
   return (
-    <FutureSectionPage
-      title="Salesforce"
-      description="A visão dedicada de casos e respostas do Salesforce está planejada."
-    />
+    <MockWorkspacePage variant="salesforce" />
   );
 }

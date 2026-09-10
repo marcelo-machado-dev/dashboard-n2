@@ -1,10 +1,7 @@
-import { FutureSectionPage } from '@/presentation/pages/future-section/future-section-page';
+import { MockWorkspacePage } from '@/presentation/pages/mock-workspace/mock-workspace-page';
 
 export default function JiraRoute() {
   return (
-    <FutureSectionPage
-      title="Jira"
-      description="A visão dedicada de solicitações e comentários do Jira está planejada."
-    />
+    <MockWorkspacePage variant="jira" />
   );
 }
